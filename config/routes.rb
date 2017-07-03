@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
-    resources :tweets , only: :index
+    resources :tweets, only: :index
   end
+
+  resources :tweets, only: :index
+
+  root to: 'tweets#index'
 end
