@@ -7,16 +7,40 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
 # Ignore all logfiles and tempfiles.
 /log/*
-/tmp/*
 !/log/.keep
-!/tmp/.keep
+/tmp
 
-.byebug_history
+/coverage
+
+# Ignore env config
+/config/application.yml
+/config/setup_aws.yml
+
+.DS_Store
+.ruby-gemset
+
+/.dump
+latest.dump
+
+# RubyMine settings etc.
+.idea/
+
+# ignore sql dump files
+/db/*.sql
+/db/*.sqlite3
+# Local redis DB
+dump.rdb
+
+
+# Any uploads
+public/ids/**/*
+public/uploads/**/*
+public/processed/**/*
 /public/packs
 /node_modules
+
+# Error logs
+yarn-error.log
+devops/*.retry

@@ -1,5 +1,5 @@
 module Api
-  class TweetsController < ApplicationController
+  class TweetsController < ApiController
     def index
       render(
         json: Tweet.all
