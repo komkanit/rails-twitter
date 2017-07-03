@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
+import Tweet from '../components/tweet'
+import Loading from '../components/loading'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { loading: true }
+    this.state = {loading: true}
   }
 
   componentDidMount() {
@@ -17,15 +19,12 @@ class App extends Component {
 
   render() {
     const {loading, tweets} = this.state
-    if (loading) {
-      return <div>Loading...</div>
-    }
+    if (loading) return <Loading/>
+
     return (
-    <ul>
-      {tweets.map(tweet => (
-        <li key={tweet.id}>{tweet.text}</li>
-      ))}
-    </ul>
+      <ul>
+        {tweets.map(tweet => (<Tweet tweet={tweet}/>))}
+      </ul>
     )
   }
 }
