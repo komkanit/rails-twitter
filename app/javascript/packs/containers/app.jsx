@@ -14,8 +14,27 @@ class App extends Component {
     this.setState({ tweetMessage: event.target.value })
   }
 
-  onTweet = () => {
-    console.log(this.state.tweetMessage)
+  onTweet = (event) => {
+    fetch(
+      '/api/tweets/',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: this.state.tweetMessage })
+      }
+    )
+      .then(response => response.json())
+      .then(response => {
+        let { tweets } = this.state
+        tweets.push(response)
+        this.setState({ tweetMessage: '', tweets: tweets })
+      })
+      .catch(error => { 
+        console.log(error) 
+      })
   }
 
   render() {

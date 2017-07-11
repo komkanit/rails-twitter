@@ -4,15 +4,13 @@ import PropTypes from 'prop-types'
 class TweetForm extends Component {
   render() {
     return (
-      <form>
-        <div className="form-group">
-          <input
-            type="text"
-            value={this.props.tweetMessage}
-            className="form-control"
-            onChange={this.props.onInputChange}
-          />
-        </div>
+      <div>
+        <input
+          type="text"
+          value={this.props.tweetMessage}
+          className="form-control"
+          onChange={this.props.onInputChange}
+        />
         <button
           type="submit"
           className="btn btn-primary"
@@ -20,7 +18,7 @@ class TweetForm extends Component {
         >
           Submit
         </button>
-      </form>
+      </div>
     )
   }
 }
