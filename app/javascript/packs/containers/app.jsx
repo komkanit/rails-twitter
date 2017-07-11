@@ -1,30 +1,34 @@
-import React, {Component} from 'react'
-import Tweet from '../components/tweet'
-import Loading from '../components/loading'
-
+import React, { Component } from 'react'
+import RecentTweets from '../components/recent_tweets'
+import TweetForm from '../components/tweet_form'
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {loading: true}
-  }
+  state = { tweetMessage: '', loading: true, tweets: [] }
 
-  componentDidMount() {
+  componentDidMount = () => {
     fetch('/api/tweets/')
       .then(response => response.json())
-      .then(response => {
-        console.log(response)
-        this.setState({tweets: response, loading: false})
-      })
+      .then(response => { this.setState({ tweets: response, loading: false }) })
+  }
+
+  onInputChange = (event) => {
+    this.setState({ tweetMessage: event.target.value })
+  }
+
+  onTweet = () => {
+    console.log(this.state.tweetMessage)
   }
 
   render() {
-    const {loading, tweets} = this.state
-    if (loading) return <Loading/>
-
+    const { loading, tweets } = this.state
     return (
-      <ul>
-        {tweets.map(tweet => (<Tweet tweet={tweet}/>))}
-      </ul>
+      <div>
+        <TweetForm
+          onInputChange={this.onInputChange}
+          onTweet={this.onTweet}
+          tweetMessage={this.state.tweetMessage}
+        />
+        <RecentTweets loading={loading} tweets={tweets} />
+      </div>
     )
   }
 }
