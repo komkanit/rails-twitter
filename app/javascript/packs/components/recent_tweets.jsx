@@ -7,7 +7,7 @@ class RecentTweets extends Component {
     const { loading, tweets } = this.props
     if (loading) return <Loading />
     return (
-      <div className="container">
+      <div>
         {tweets.map(tweet => (<Tweet key={tweet.id} tweet={tweet} />))}
       </div>
     )

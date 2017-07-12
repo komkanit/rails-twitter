@@ -2,11 +2,14 @@ import React from 'react'
 
 const Tweet = ({ tweet }) => {
   return (
-    <div className="card w-50">
-      <div className="card-block">
-        <h3 className="card-title">Tweet by Someone</h3>
-        <p className="card-text">{tweet.text}</p>
-        <a href="#" className="btn btn-primary btn-xs">Button</a>
+    <div className="row justify-content-center mb-2">
+      <div className="col-6">
+        <div className="card">
+          <div className="card-block">
+            <h6 className="card-title">Tweet by Someone</h6>
+            <p className="card-text">{tweet.text}</p>
+          </div>
+        </div>
       </div>
     </div>
   )

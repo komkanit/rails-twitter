@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RecentTweets from '../components/recent_tweets'
 import TweetForm from '../components/tweet_form'
 class App extends Component {
-  state = { tweetMessage: '', loading: true, tweets: [] }
+  state = { tweetMessage: '', formError: false, loading: true, tweets: [] }
 
   componentDidMount = () => {
     fetch('/api/tweets/')
@@ -28,23 +28,31 @@ class App extends Component {
     )
       .then(response => response.json())
       .then(response => {
-        let { tweets } = this.state
-        tweets.push(response)
-        this.setState({ tweetMessage: '', tweets: tweets })
+        if (response.error === undefined) {
+          let { tweets } = this.state
+          tweets.push(response)
+          this.setState({ 
+            tweetMessage: '', 
+            formError: false,
+            tweets: tweets.reverse() })
+        } else {
+          this.setState({formError: true}) 
+        }
       })
-      .catch(error => { 
-        console.log(error) 
+      .catch(error => {
+        console.log(error)
       })
   }
 
   render() {
     const { loading, tweets } = this.state
     return (
-      <div>
+      <div className="container">
         <TweetForm
           onInputChange={this.onInputChange}
           onTweet={this.onTweet}
           tweetMessage={this.state.tweetMessage}
+          formError={this.state.formError}
         />
         <RecentTweets loading={loading} tweets={tweets} />
       </div>
