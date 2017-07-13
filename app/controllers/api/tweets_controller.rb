@@ -1,17 +1,17 @@
 module Api
   class TweetsController < ApiController
     def index
-      tweets = Tweet.all
-      render json: Tweet.all
+      tweets = current_user.tweets
+      render json: tweets
     end
 
     def show
-      tweet = Tweet.find(params[:id])
+      tweet = current_user.tweets.find(params[:id])
       render json: tweet
     end
 
     def create
-      tweet = Tweet.new(tweet_params)
+      tweet = current_user.tweets.build(tweet_params)
       if tweet.save
         render json: tweet, status: :created
       else
