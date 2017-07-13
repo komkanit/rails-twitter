@@ -1,17 +1,14 @@
 class ApiController < ActionController::API
+  before_action :doorkeeper_authorize!
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_error
 
+  private def current_user
+    return if doorkeeper_token.blank?
+    @current_user ||= User.find(doorkeeper_token.resource_owner_id)
+  end
+
   concerning :Errors do
-    #
-    # Renders a JSON error with a HTTP status code defined by status
-    # For a list of valid Rails/HTTP statuses see:
-    # http://guides.rubyonrails.org/layouts_and_rendering.html#the-status-option
-    #
-    # Example:
-    #
-    # api_error :unauthorized, 'You are not authorized to do this.'
-    #
     private def api_error(status, message)
       render status: status, json: { error: status, error_description: message }
     end
