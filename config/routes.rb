@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   end
 
   resources :tweets, only: :index
-
+  get '/*path', to: 'tweets#index' 
   root to: 'tweets#index'
 end
