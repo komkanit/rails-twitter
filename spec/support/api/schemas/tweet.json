@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["id", "text", "tweet_at"],
+  "properties": {
+    "id": { "type": "integer" },
+    "text": { "type": "string" },
+    "tweet_at": { "type": "string" }
+  }
+}
